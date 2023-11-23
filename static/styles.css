@@ -1,0 +1,20 @@
+/* CSS stil ekleyerek form elemanlarını hizalayabilirsiniz */
+label {
+    display: inline-block;
+    width: 70% /* İstenilen genişliği ayarlayabilirsiniz */
+    margin-bottom: 5px;
+}
+
+/* Tüm içeriği ortala */
+body {
+    text-align: center;
+}
+
+/* Form elemanlarını ortala */
+form {
+    display: inline-block;
+}
+
+textarea.Whiteboard{
+    text-align: center;
+}

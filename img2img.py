@@ -23,7 +23,10 @@ class Img2Img:
         self.pipe = StableDiffusionImg2ImgPipeline.from_pretrained(self.model_path)
         self.pipe = self.pipe.to('cpu')
 
-    def generate_image(self, prompt, image_path, strength=0.75, guidance_scale=7.5):
+    def generate_image(self, prompt, image_path, strength=0.05, guidance_scale=0.2):
+        # todo: parametleri düzeltmeyi unutma. parametreler de input olarak alınabilir.
+        # strength; 0: aynı resme yakınlaşır, 1: yaratıcılık artar. 0.75
+        # guidance_scale: değer ne kadar büyük olursa promtun işlevi o kadar artar. 7.5
         init_image = Image.open(image_path).convert("RGB")
         init_image = init_image.resize((512, 512))
 
@@ -37,7 +40,8 @@ class Img2Img:
         output_path = uniquify(
             os.path.join(self.save_path, (prompt[:25] + "...") if len(prompt) > 25 else prompt) + ".png")
         print(output_path)
-        generated_image.save(output_path)
+        # generated_image.save(output_path)
+        # şimdilik resmi bir yere kaydetmeyip return etsin. ben alır kaydederim gittiği yerde.
         return generated_image
 
 
@@ -47,4 +51,5 @@ if __name__ == '__main__':
                                   image_path="C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru "
                                              "case çalışması/coffee-4908764_1280.jpg")
 else:
+    print("img2img dışarıdan çalıştırıldı.")
     image_pipeline = Img2Img()
