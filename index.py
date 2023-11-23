@@ -7,6 +7,8 @@ import main
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
+# daha sonra bu yapı değiştirilip yüklenen ve oluşturulan
+# resimler farklı klasörlere kaydedilebilir.
 
 
 @app.route('/')
@@ -16,6 +18,9 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
+    # todo: bu yapıyı ajax ile yapsam daha güzel olur.
+    # bu şekilde taryıcı sunucudan veri beklerken patlayabilir.
+
     # Formdan gelen verileri al
     image = request.files['image']
     promt = request.form['promt']
@@ -24,35 +29,27 @@ def submit():
     punchline = request.form['punchline']
     button_text = request.form['button_text']
 
-    # Verileri işle (örneğin, resmi işle ve yeni bir resim oluştur)
-    # Bu kısmı ihtiyacınıza göre özelleştirebilirsiniz.
-    print("resim oluşturma başladı.")
-    print("image: ", image)
-    print("promt: ", promt)
-    print("logo: ", logo)
-    print("color: ", color)
-    print("punchline: ", punchline)
-    print("button_text: ", button_text)
+    # verilern parametreler ile stable diffusion ile resim oluşturuluyor.
     generated_image = main.sunu.CreateImage(prompt=promt, image=image)
 
-    # Örneğin, yüklenen resmi 'uploads' klasörüne kaydet
+    # üretilmiş resmi 'uploads' klasörüne kaydet.
     generated_image.save(os.path.join(app.config['UPLOAD_FOLDER'], "uretilmis_resim.jpg"))
 
-    # Sonucun bulunduğu yolu belirt
+    # üretilmiş resmin bulunduğu yolu al.
     result_image_path = os.path.join(app.config['UPLOAD_FOLDER'], "uretilmis_resim.jpg")
 
+    # üretilmiş resmi klasörden çekip template oluşturmaya başla.
     generate_template = main.sunu.CreateTemplate(generated_image=result_image_path,
                                                  logo_path=logo,
                                                  punchline=punchline,
                                                  button_text=button_text,
                                                  button_punchline_color=color)
-    print("generated_image:", generate_template)  # Bu satır eklenmiş
-    # Resmi base64 formatına dönüştür
+    # Resmi ön tarafa gönderebilmek için base64 formatına dönüştür
     img_buffer = BytesIO()
     generate_template.save(img_buffer, format="JPEG")
     img_str = base64.b64encode(img_buffer.getvalue()).decode('utf-8')
 
-    # Şablona sonucun yolunu ve diğer verileri gönder
+    # template'i ön tarafa gönder ve karşıla.
     return render_template('index.html', result_image=img_str)
 
 

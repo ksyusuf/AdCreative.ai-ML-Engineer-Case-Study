@@ -15,7 +15,7 @@
 
         <form action="/submit" method="post" enctype="multipart/form-data" class="mt-5">
             <div class="form-group">
-                <label for="image">Resim Yükle:</label>
+                <label for="image">Resim Yükle</label>
                 <div class="custom-file">
                     <input type="file" name="image" accept="image/*" class="custom-file-input">
                     <label class="custom-file-label" for="image">Dosya seç</label>
@@ -23,12 +23,12 @@
             </div>
 
             <div class="form-group">
-                <label for="promt">Promt:</label>
-                <input type="text" name="promt" class="form-control">
+                <label for="promt">Promt</label>
+                <input type="text" name="promt" class="form-control Whiteboard">
             </div>
 
             <div class="form-group">
-                <label for="logo">Logo Yükle:</label>
+                <label for="logo">Logo Yükle</label>
                 <div class="custom-file">
                     <input type="file" name="logo" accept="image/*" class="custom-file-input">
                     <label class="custom-file-label" for="logo">Dosya seç</label>
@@ -36,21 +36,21 @@
             </div>
 
             <div class="form-group">
-                <label for="color">Renk Seçici (Hex Kodu):</label>
+                <label for="color">Renk Seçici (Hex Kodu)</label>
                 <input type="color" name="color" class="form-control">
             </div>
 
             <div class="form-group">
-                <label for="punchline">Punchline:</label>
-                <textarea name="punchline" rows="4" cols="50" class="form-control Whiteboard"></textarea>
+                <label for="punchline">Punchline</label>
+                <textarea name="punchline" rows="2" cols="50" class="form-control Whiteboard"></textarea>
             </div>
 
             <div class="form-group">
-                <label for="button_text">Button Text:</label>
-                <input type="text" name="button_text" class="form-control">
+                <label for="button_text">Button Text</label>
+                <input type="text" name="button_text" class="form-control Whiteboard">
             </div>
 
-            <button type="submit" class="btn btn-primary">Gönder</button>
+            <button type="submit" class="btn btn-primary">Oluştur</button>
         </form>
 
         {% if result_image %}

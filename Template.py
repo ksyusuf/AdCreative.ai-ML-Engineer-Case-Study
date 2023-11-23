@@ -41,6 +41,7 @@ class Template:
         # Fontu seç
         font_path = ('C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case '
                      'çalışması/Playfair_Display/PlayfairDisplay-ExtraBold.ttf')
+        # todo: yayına alırken fontu da projeye dahil edeceksin.
         font_size = 44
         font = ImageFont.truetype(font_path, font_size)
 
@@ -97,6 +98,8 @@ class Template:
         # Butonu ovalleştir ve renk ve konumu belirle
         rounded_rectangle(draw_button, button_position, (button_width, button_height), radius=15,
                           fill=button_punchline_color)
+        # todo: resmin de kenarları yuvarlatılacak.
+        # todo: template'in kenarlarında borderline olacak
 
         return ad_template
 
@@ -130,5 +133,5 @@ if __name__ == '__main__':
     ad_template = template.create_ad_template(image_path, logo_path, punchline, button_text, button_punchline_color)
     template.Kaydet(ad_template)
 else:
-    print("task dışarıdan çalıştırıldı.")
+    print("Task dışarıdan çalıştırıldı.")
     template = Template()

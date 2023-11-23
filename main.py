@@ -1,10 +1,10 @@
-import img2img, task
+import img2img, Template
 
 
 class Sunum:
     def __init__(self):
         self.model = img2img.Img2Img()
-        self.template = task.Template()
+        self.template = Template.Template()
 
     def CreateImage(self, prompt="latte in red cup",
                     image='../AdCreative.ai-ML-Engineer-Case-Study/uploads/coffee-5495609_1280.jpg'):

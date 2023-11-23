@@ -15,8 +15,12 @@ def uniquify(path):
 class Img2Img:
     def __init__(self):
         self.model_path = os.getenv("SDV5_MODEL_PATH")
+        # todo: yayınlamadan önce bu yapıyı değiştirmelisin.
+        # şuanda modeli proje dışındaki bir klasörden alıyor.
+        # # şu haliyle sunucuda çalışmaz. çünkü stable diffusion proje dışında.
         self.save_path = os.path.join("C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case "
                                       "çalışması", "SDV5_OUTPUT")
+        # todo: yayından önce düzeltilecek.
         if not os.path.exists(self.save_path):
             os.mkdir(self.save_path)
         # modeli oluşturalım
@@ -39,7 +43,6 @@ class Img2Img:
         # oluşan resmi benzersiz bir isim ile kaydedelim
         output_path = uniquify(
             os.path.join(self.save_path, (prompt[:25] + "...") if len(prompt) > 25 else prompt) + ".png")
-        print(output_path)
         # generated_image.save(output_path)
         # şimdilik resmi bir yere kaydetmeyip return etsin. ben alır kaydederim gittiği yerde.
         return generated_image
