@@ -1,8 +1,5 @@
 import os
-from torch import autocast
 from diffusers import StableDiffusionPipeline
-from torchvision import transforms
-from PIL import Image
 
 SDV5_MODEL_PATH = os.getenv("SDV5_MODEL_PATH")
 SAVE_PATH = os.path.join("C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case çalışması", "SDV5_OUTPUT")
