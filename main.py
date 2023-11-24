@@ -1,10 +1,12 @@
-import img2img, Template
+# import img2img
+import Template
 from post_islemi_deneme import UzakBaglanti
 
 
 class Sunum:
     def __init__(self):
-        self.model = img2img.Img2Img()
+        # self.model = img2img.Img2Img()
+        # uzak bilgisayarda çalıştıracağımız için bunu kullanmayacağız.
         self.template = Template.Template()
 
     def CreateImage(self, prompt="latte in red cup",

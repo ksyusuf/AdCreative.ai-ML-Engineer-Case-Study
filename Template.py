@@ -39,9 +39,12 @@ class Template:
         # https://fonts.google.com/specimen/Playfair+Display
         draw = ImageDraw.Draw(ad_template)
         # Fontu seç
-        font_path = ('C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case '
-                     'çalışması/Playfair_Display/PlayfairDisplay-ExtraBold.ttf')
-        # todo: yayına alırken fontu da projeye dahil edeceksin.
+        # Scriptin bulunduğu klasörün yolu
+        script_folder = os.path.dirname(os.path.abspath(__file__))
+        # Font dosyasının tam yolu
+        font_path = os.path.join(script_folder,
+                                 'Yazi-Font',
+                                 'PlayfairDisplay-ExtraBold.ttf')
         font_size = 44
         font = ImageFont.truetype(font_path, font_size)
 
