@@ -1,6 +1,6 @@
 # import img2img
 import Template
-from post_islemi_deneme import UzakBaglanti
+from Uzak_Baglanti import UzakBaglanti
 
 
 class Sunum:
@@ -20,9 +20,8 @@ class Sunum:
         # üretilmiş resmi geri döndürür.
         return generate_image
 
-    def CreateTemplate(self, generated_image='../AdCreative.ai-ML-Engineer-Case-Study/uploads/coffee-5495609_1280.jpg',
-                       logo_path="C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case "
-                                 "çalışması/AdCreative.ai-ML-Engineer-Case-Study/uploads/coffee-logo.png",
+    def CreateTemplate(self, generated_image='../AdCreative.ai-ML-Engineer-Case-Study/uploads/latte in purple cup.png',
+                       logo_path="../uploads/coffee-logo.png",
                        punchline="Kahve dünyasının bir numarası/nSipariş için dokunun",
                        button_text="Sipariş   >",
                        button_punchline_color="#007bff"):
@@ -31,8 +30,7 @@ class Sunum:
                                                        punchline,
                                                        button_text,
                                                        button_punchline_color)
-        return_patch = self.template.Kaydet(ad_template=ad_template,
-                                            save_patch='../AdCreative.ai-ML-Engineer-Case-Study/uploads/Api_')
+        return_patch = self.template.Kaydet(ad_template=ad_template)
         return ad_template
 
 

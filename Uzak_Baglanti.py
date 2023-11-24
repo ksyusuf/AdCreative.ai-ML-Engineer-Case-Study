@@ -4,18 +4,10 @@ import base64
 from PIL import Image
 from io import BytesIO
 
-"""
-BURASI SUNUCA ÇALIŞACAK
-RESMİ VE PROMTU ALIP YEREL BİLGİSAYARA GÖNDERECEK VE İŞLENMİŞ RESMİ ALACAK.
-SADECE STABLE DİFFUSİON İLE RESİM ÜRETME İŞİ YERELDE OLACAK, GERİSİ SUNUCUDA.
-isteği sunucu yapar. yerel bilgisayar karşılar.
-sunucu yerel bilgisayara post işlemi yapar. promt + image --->>> return generated_image
-"""
-
 
 class UzakBaglanti:
     def __init__(self, prompt, image, server_url):
-        # uzak bilgisayara da parametre göndermeme durumu olmaz ya.
+        # uzak bilgisayara parametre göndermeme durumu olmaz şimdilik.
         self.server_url = server_url  # Uzak bilgisayarın IP adresi ve portunu güncelle
 
         image.save(os.path.join("uploads", image.filename))

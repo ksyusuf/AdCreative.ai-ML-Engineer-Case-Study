@@ -17,8 +17,8 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    # todo: bu yapıyı ajax ile yapsam daha güzel olur.
-    # bu şekilde taryıcı sunucudan veri beklerken patlayabilir.
+    # todo: bu yapının ajax ile yapılması daha iyi olur.
+    # daha kullanıcı dostu olur.
 
     # Formdan gelen verileri al
     image = request.files['image']

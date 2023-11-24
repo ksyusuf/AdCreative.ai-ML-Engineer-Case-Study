@@ -4,6 +4,7 @@ from PIL import ImageDraw, ImageFont
 
 
 def uniquify(path):
+    """kaydedilen dosyaların isimlerini benzersiz yapar."""
     filename, extension = os.path.splitext(path)
     counter = 1
     while os.path.exists(path):
@@ -13,11 +14,6 @@ def uniquify(path):
 
 
 class Template:
-    def __init__(self):
-        self.SAVE_PATH = ("C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case "
-                          "çalışması/templateler/"
-                          "kahve")
-
     def create_ad_template(self, generated_image, logo, punchline, button_text, button_punchline_color):
         # Kaynak resmi açın
         generated_image = Image.open(generated_image)
@@ -36,7 +32,6 @@ class Template:
         ad_template.paste(generated_image, image_position)
 
         # Punchline'ı ekleyin
-        # https://fonts.google.com/specimen/Playfair+Display
         draw = ImageDraw.Draw(ad_template)
         # Fontu seç
         # Scriptin bulunduğu klasörün yolu
@@ -48,7 +43,7 @@ class Template:
         font_size = 44
         font = ImageFont.truetype(font_path, font_size)
 
-        # Metni ortadan \n kaçış dizesine göre böl
+        # Metni \n kaçış dizesine göre böl
         lines = punchline.split('\n')
 
         # İlk satırın boyutlarını ölç
@@ -69,8 +64,8 @@ class Template:
             y2 = y1 + text_height + 10  # 10 piksel boşluk bırak
             draw.text((x2, y2), lines[1], fill=button_punchline_color, font=font)
 
-        # Button'u ekle
         def rounded_rectangle(draw, position, size, radius=25, fill="white", outline=None):
+            """butonun kenarlarını yuvarlar."""
             x, y = position
             width, height = size
             draw.pieslice([x, y, x + 2 * radius, y + 2 * radius], 180, 270, fill=fill, outline=outline)
@@ -83,7 +78,7 @@ class Template:
 
             # Butonun içine yazı ekleyin
             font_size_button = 20
-            font_button = ImageFont.truetype(font_path, font_size_button)  # İlgili fontu kullanabilirsin
+            font_button = ImageFont.truetype(font_path, font_size_button)  # punchline'ın fontu
 
             # Yazıyı butonun içine yerleştirin
             text_width_button, text_height_button = draw_button.textbbox((0, 0), button_text, font=font_button)[2:]
@@ -91,11 +86,12 @@ class Template:
             y_button = y + (height - text_height_button) // 2  # Butonun ortasına yerleştirmek için
             draw_button.text((x_button, y_button), button_text, fill="white", font=font_button)
 
+        # Button'u ekle
         button_width = 200
         button_height = 50
         draw_button = ImageDraw.Draw(ad_template)
 
-        # # Butonun konumunu belirleyin ve resme ekleyin
+        # Butonun konumunu belirleyin ve resme ekleyin
         button_position = ((ad_template.width - button_width) // 2, ad_template.height - button_height - 30)
 
         # Butonu ovalleştir ve renk ve konumu belirle
@@ -106,32 +102,36 @@ class Template:
 
         return ad_template
 
-    def Kaydet(self, ad_template, save_patch="C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru "
-                                             "case çalışması/templateler/kahve"):
-        # Reklam template'ini kaydedin
-        template_patch = uniquify(save_patch + "_template.png")
-        ad_template.save(template_patch)
+    import os
 
-        # ve kaydettiğim dosyanın yolunu return olarak ver. lazım olur.
-        return template_patch
+    import os
+
+    def Kaydet(self, ad_template):
+        """oluşturulan template'i bir üst dizinde templates klasörüne kaydeder."""
+        # Bulunulan dizinin bir üst dizini
+        parent_directory = os.path.dirname(os.getcwd())
+
+        # "templates" klasörünü oluştur
+        templates_folder = os.path.join(parent_directory, "templates")
+        os.makedirs(templates_folder, exist_ok=True)
+
+        # Reklam template'ini kaydet
+        template_path = uniquify(os.path.join(templates_folder, "ad_template.png"))
+        ad_template.save(template_path)
+
+        # Kaydedilen dosyanın yolunu return et. İleride lazım olabilir.
+        return template_path
 
 
 if __name__ == '__main__':
     template = Template()
 
     # İlgili inputları tanımlayın
-    image_path = (
-        "C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case çalışması/SDV5_OUTPUT/"
-        "latte in purple cup.png")
-    logo_path = ("C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case "
-                 "çalışması/"
-                 "coffee-logo.png")
+    image_path = "../SDV5_OUTPUT/latte in purple cup.png"
+    logo_path = "../coffee-logo2.png"
     punchline = "bu kahve masası\nha ri ka"
     button_text = "Sipariş   >"
     button_punchline_color = "#007bff"  # Örnek renk kodu
-    SAVE_PATH = ("C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case "
-                 "çalışması/templateler/"
-                 "kahve")
 
     ad_template = template.create_ad_template(image_path, logo_path, punchline, button_text, button_punchline_color)
     template.Kaydet(ad_template)
