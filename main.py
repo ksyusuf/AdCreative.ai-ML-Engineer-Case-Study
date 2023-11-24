@@ -1,4 +1,5 @@
 import img2img, Template
+from post_islemi_deneme import UzakBaglanti
 
 
 class Sunum:
@@ -8,8 +9,14 @@ class Sunum:
 
     def CreateImage(self, prompt="latte in red cup",
                     image='../AdCreative.ai-ML-Engineer-Case-Study/uploads/coffee-5495609_1280.jpg'):
+        # bu noktada uzak bilgisayarla bağlantı kurma işlemini gerçekleştirsin.
+        generate_image = (UzakBaglanti(prompt=prompt,
+                                      image=image,
+                                      server_url="http://192.168.84.106:8000/process_image")
+                          .postIt())
+
         # üretilmiş resmi geri döndürür.
-        return self.model.generate_image(prompt=prompt, image_path=image)
+        return generate_image
 
     def CreateTemplate(self, generated_image='../AdCreative.ai-ML-Engineer-Case-Study/uploads/coffee-5495609_1280.jpg',
                        logo_path="C:/Users/ksyus/Documents/Yazılımsal Projeler/adCreative.ai iş başvuru case "
