@@ -6,9 +6,12 @@ from io import BytesIO
 
 
 class UzakBaglanti:
-    def __init__(self, prompt, image, server_url):
+    def __init__(self, prompt, image):
         # uzak bilgisayara parametre göndermeme durumu olmaz şimdilik.
-        self.server_url = server_url  # Uzak bilgisayarın IP adresi ve portunu güncelle
+        ip_adresi = "192.168.1.199"
+        port = "8000"
+        self.server_url = f"http://{ip_adresi}:{port}/process_image"
+        # Uzak bilgisayarın IP adresi ve portunu güncelle
 
         image.save(os.path.join("uploads", image.filename))
         # kodlarım dosya yolu ile çalıştığı için

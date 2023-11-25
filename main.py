@@ -13,8 +13,7 @@ class Sunum:
                     image='../AdCreative.ai-ML-Engineer-Case-Study/uploads/coffee-5495609_1280.jpg'):
         # bu noktada uzak bilgisayarla bağlantı kurma işlemini gerçekleştirsin.
         generate_image = (UzakBaglanti(prompt=prompt,
-                                      image=image,
-                                      server_url="http://192.168.84.106:8000/process_image")
+                                      image=image)
                           .postIt())
 
         # üretilmiş resmi geri döndürür.
