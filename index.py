@@ -1,8 +1,8 @@
 import base64
 from io import BytesIO
 from flask import Flask, render_template, request
-import os
 import main
+from PIL import Image
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -30,15 +30,19 @@ def submit():
 
     # verilern parametreler ile stable diffusion ile resim oluşturuluyor.
     generated_image = main.sunu.CreateImage(prompt=promt, image=image)
+    print("generated_image tipi: ", generated_image)
 
-    # üretilmiş resmi 'uploads' klasörüne kaydet.
-    generated_image.save(os.path.join(app.config['UPLOAD_FOLDER'], "uretilmis_resim.jpg"))
-
-    # üretilmiş resmin bulunduğu yolu al.
-    result_image_path = os.path.join(app.config['UPLOAD_FOLDER'], "uretilmis_resim.jpg")
+    ### -----------------
+    # # üretilmiş resmi 'uploads' klasörüne kaydet.
+    # generated_image.save(os.path.join(app.config['UPLOAD_FOLDER'], "uretilmis_resim.jpg"))
+    #
+    # # üretilmiş resmin bulunduğu yolu al.
+    # result_image_path = os.path.join(app.config['UPLOAD_FOLDER'], "uretilmis_resim.jpg")
+    # bu metotları iptal ettim çünkü sunucu içerisinde kayıt yapamıyorum
+    ### -----------------
 
     # üretilmiş resmi klasörden çekip template oluşturmaya başla.
-    generate_template = main.sunu.CreateTemplate(generated_image=result_image_path,
+    generate_template = main.sunu.CreateTemplate(generated_image=generated_image,
                                                  logo_path=logo,
                                                  punchline=punchline,
                                                  button_text=button_text,

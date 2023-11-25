@@ -13,15 +13,21 @@ class UzakBaglanti:
         self.server_url = f"http://{ip_adresi}:{port}/process_image"
         # Uzak bilgisayarın IP adresi ve portunu güncelle
 
-        image.save(os.path.join("uploads", image.filename))
-        # kodlarım dosya yolu ile çalıştığı için
-        # gelen resimleri önce kaydettim sonra yollarını aldım
+        # image.save(os.path.join("uploads", image.filename))
+        # # kodlarım dosya yolu ile çalıştığı için
+        # # gelen resimleri önce kaydettim sonra yollarını aldım
+        #
+        # self.file_path = os.path.join("uploads", image.filename)
 
-        self.file_path = os.path.join("uploads", image.filename)
+        self.image = image
         self.prompt = prompt
 
     def postIt(self):
-        with open(self.file_path, "rb") as image_file:
+        # with open(self.file_path, "rb") as image_file:
+        #     data = base64.b64encode(image_file.read())
+
+        # Dosyayı kaydetmeden okuma işlemi
+        with self.image.stream as image_file:
             data = base64.b64encode(image_file.read())
 
         # im = Image.open(BytesIO(base64.b64decode(data)))

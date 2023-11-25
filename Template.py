@@ -1,3 +1,5 @@
+from io import BytesIO
+
 from PIL import Image
 import os
 from PIL import ImageDraw, ImageFont
@@ -16,7 +18,11 @@ def uniquify(path):
 class Template:
     def create_ad_template(self, generated_image, logo, punchline, button_text, button_punchline_color):
         # Kaynak resmi açın
-        generated_image = Image.open(generated_image)
+        # generated_image = Image.open(generated_image)
+        # image.open fonksiyonu resmi string olarak alır.
+
+        background = Image.new("RGB", (generated_image.width, generated_image.height), "blue")
+        background.paste(generated_image, (0, 0))  # İkinci argüman, yapıştırma konumunu belirtir
 
         # Reklam şablonunu oluşturmak için yeni bir görüntü oluşturun
         ad_template = Image.new("RGB", (800, 800), "white")
@@ -102,9 +108,7 @@ class Template:
 
         return ad_template
 
-    import os
 
-    import os
 
     def Kaydet(self, ad_template):
         """oluşturulan template'i bir üst dizinde templates klasörüne kaydeder."""
@@ -133,7 +137,14 @@ if __name__ == '__main__':
     button_text = "Sipariş   >"
     button_punchline_color = "#007bff"  # Örnek renk kodu
 
-    ad_template = template.create_ad_template(image_path, logo_path, punchline, button_text, button_punchline_color)
+    processed_image = Image.open(image_path)
+    # artık gelen resim yol olarak değil de direkt resim olarak fonksiyona verilecek.
+
+    ad_template = template.create_ad_template(processed_image,
+                                              logo_path,
+                                              punchline,
+                                              button_text,
+                                              button_punchline_color)
     template.Kaydet(ad_template)
 else:
     print("Task dışarıdan çalıştırıldı.")
