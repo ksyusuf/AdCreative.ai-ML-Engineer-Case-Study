@@ -34,7 +34,7 @@ class UzakBaglanti:
 
         try:
             response = requests.post(self.server_url, data={'image': data,
-                                                        'prompt': self.prompt})
+                                                            'prompt': self.prompt})
         except Exception as e:
             # Hata durumunda hata mesajını al ve istemciye gönder
             error_message = f"Error: {str(e)}"

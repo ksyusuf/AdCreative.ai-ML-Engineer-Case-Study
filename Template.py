@@ -20,7 +20,7 @@ class Template:
         # Kaynak resmi açın
         # generated_image = Image.open(generated_image)
         # image.open fonksiyonu resmi string olarak alır.
-
+        print("template'e gelen resim türü:\n", type(generated_image))
         background = Image.new("RGB", (generated_image.width, generated_image.height), "blue")
         background.paste(generated_image, (0, 0))  # İkinci argüman, yapıştırma konumunu belirtir
 
