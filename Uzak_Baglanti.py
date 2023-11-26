@@ -10,8 +10,8 @@ class UzakBaglanti:
         # uzak bilgisayara parametre göndermeme durumu olmaz şimdilik.
         ip_adresi = "192.168.1.199"
         port = "8000"
-        self.server_url = f"http://{ip_adresi}:{port}/process_image"
-        # self.server_url = "http://[2xxxxxxxxx9:3650:xxxxx]:8000"
+        # self.server_url = f"http://{ip_adresi}:{port}/process_image"
+        self.server_url = "http://[2a02:4e0:2d94:448c:3eb8:9da0:30a4:160b]:8000/process_image"
         # malesef genel ip adresli olay çalışmıyor.
         # muhtemelen modem ayarlarını falan yapamadım
         # Uzak bilgisayarın IP adresi ve portunu güncelle
