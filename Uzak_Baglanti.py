@@ -1,8 +1,9 @@
-import os
 import requests
 import base64
 from PIL import Image
 from io import BytesIO
+
+from flask import jsonify
 
 
 class UzakBaglanti:
@@ -31,8 +32,13 @@ class UzakBaglanti:
         # im değişkeni kaydedilebilir.
         # im.save('image1.png', 'PNG')
 
-        response = requests.post(self.server_url, data={'image': data,
+        try:
+            response = requests.post(self.server_url, data={'image': data,
                                                         'prompt': self.prompt})
+        except Exception as e:
+            # Hata durumunda hata mesajını al ve istemciye gönder
+            error_message = f"Error: {str(e)}"
+            return jsonify({'error': error_message}), 500
 
         # Sunucu tarafından dönen Base64 kodlanmış işlenmiş resmi çöz
         processed_image_data = base64.b64decode(response.json()['processed_image'])

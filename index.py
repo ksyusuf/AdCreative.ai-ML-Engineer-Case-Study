@@ -57,7 +57,7 @@ def submit():
 
     # verilern parametreler ile stable diffusion ile resim oluşturuluyor.
     generated_image = main.sunu.CreateImage(prompt=promt, image=image)
-    print("generated_image tipi: ", generated_image)
+    # print("generated_image tipi: ", generated_image)
 
     ### -----------------
     # # üretilmiş resmi 'uploads' klasörüne kaydet.
