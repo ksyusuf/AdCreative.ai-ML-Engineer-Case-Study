@@ -1,0 +1,27 @@
+program lokalde genel adres üzerinden istek atıp cevap alabiliyor.
+fakat sunucuya atıldığı zaman vercel üzerinden get isteği attığımda aldığım hata
+
+`Error: HTTPConnectionPool(host='2a02:4e0:2d98:6f59:5b46:6fc5:9851:19f2', port=8000): Max retries exceeded with url: /process_image (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7f17faa61f40>: Failed to resolve '2a02:4e0:2d98:6f59:5b46:6fc5:9851:19f2' ([Errno -9] Address family for hostname not supported)"))`
+
+şu şekilde oluyor.
+modem arayüzünden port yönlendirmesi yapılması gerekiyor.
+fakat bunu da denediğimde çalıştıramadım.
+
+gpt den duyduğum DynDNS ve No-IP çalışma mantıklarını ve işime yarayabilirliğini kontrol edebilirim.
+
+ÇALIŞMA ŞEKLİ:
+
+( HOST/YEREL BİLGİSAYARDAKİ DOSYALAR )
+main dosyası clientten gelen isteği stable_diffusiona iletiyor.
+gelen resmi ve promtu alır resmi zekanın işleyebileceği şekilde dönüştürür base64 gibi.
+aslında clientten resmin gelirken dönüştürüldüğü formattan tekrar png ye dönüştürü. lokale kaydeder.
+zekaya resmin dosya yolunu ve promtu verir ve çıktıyı alıp dönüştürüp client tarafına iletir.
+
+bu aktarımı sağlarken kendisini çalıştığı bilgisayar ağında genel ağ ve yönlenirilmiş port ile dinleme moduna almıştır.
+
+( CLİENT/UZAK BİLGİSAYAR DOSYALAR )
+ilgili formdan gelen isteği alır ilgili değişkenlere atar. ve resmi CreateImage sınıfına yönelendirir.
+bu sınıf gelen resmi alır HOST/YEREL bilgisayara post metodu ile yollamak üzere uzak bağlantı sınıfına yönlendirir.
+uzak bağlantı sınıfında HOST/YEREL bilgisayarın genel adresi ve yollanacak portu bellidir ve buraya post isteği ile
+resmi ve promtu iletir. fakat burada hata oluyor işte çünkü sunucu içerisinde çalırken isteği atamıyor.
+get metodu ile istek atma olayını test etmeye çalışırken aldığım hata yukarıda.
