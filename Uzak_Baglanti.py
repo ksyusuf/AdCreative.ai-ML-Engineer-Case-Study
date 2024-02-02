@@ -60,7 +60,7 @@ class UzakBaglanti:
             error_message = f"Error: {str(e)}"
             return jsonify({'error': error_message}), 500
 
-        return "get işlemi"
+        return response.text
 
 
 if __name__ == '__main__':
