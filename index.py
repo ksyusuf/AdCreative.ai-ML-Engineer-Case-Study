@@ -42,6 +42,13 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/get_istegi', methods=['GET'])
+def get_istegi():
+    from Uzak_Baglanti import UzakBaglanti
+    get_istegi = UzakBaglanti(None, None).GetIt()
+    return get_istegi
+
+
 @app.route('/submit', methods=['POST'])
 def submit():
     # todo: bu yapının ajax ile yapılması daha iyi olur.
